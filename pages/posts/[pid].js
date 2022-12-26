@@ -1,11 +1,22 @@
 import configs from "../../common/configs";
+import Header from "../../components/header";
+import Navbar from "../../components/navbar";
 
 export default function Post({ data }) {
   function createMarkup() {
     return { __html: data.content };
   }
 
-  return <div dangerouslySetInnerHTML={createMarkup()} />;
+  return (
+    <div className="container">
+      <Header title={data.title} />
+      <main>
+        <Navbar />
+        <h3>{data.title}</h3>
+        <div dangerouslySetInnerHTML={createMarkup()} />
+      </main>
+    </div>
+  );
 }
 
 export async function getServerSideProps(context) {

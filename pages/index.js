@@ -4,6 +4,8 @@ import configs from "../common/configs";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Header from "../components/header";
+import Navbar from "../components/navbar";
+import Image from "next/image";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,37 +19,39 @@ export default function Home({ data }) {
   }, []);
 
   return (
-    <>
+    <div className="container">
       <Header title="Home" />
-
-      <main className={styles.main}>
+      <main>
+        <Navbar />
         {/* list post */}
-        <ul>
+        <div className="row text-center">
           {posts.map((post, index) => (
-            <li key={index}>
+            <div className="col-6 col-md-4 col-lg-3 px-1" key={index}>
               <Link href={"/posts/" + post.slug}>
-                <img
-                  src={post.post_thumbnail.URL}
-                  width={100}
-                  height={100}
-                  alt="aaa"
-                />
-                {post.title}
+                <div className="ratio ratio-4x3">
+                  <Image className="img-thumbnail img-cover p-0 border-0"
+                    src={post.post_thumbnail.URL}
+                    width={100}
+                    height={100}
+                    alt="aaa"
+                  />
+                </div>
+                <p className="text-truncate px-3">{post.title}</p>
               </Link>
-            </li>
+            </div>
           ))}
-        </ul>
+        </div>
         {/* pagination */}
-        <ul>
+        {/* <ul>
           <li></li>
-        </ul>
+        </ul> */}
       </main>
-    </>
+    </div>
   );
 }
 
 export async function getServerSideProps(context) {
-  const numOfPage = 2;
+  const numOfPage = 10;
   const res = await fetch(
     configs.API_POSTS_URL + `/?fields=ID,title,post_thumbnail,slug&number=${numOfPage}`
   );
@@ -69,6 +73,6 @@ export async function getServerSideProps(context) {
   };
 
   return {
-    props: { data }, // will be passed to the page component as props
+    props: { data },
   };
 }
