@@ -1,13 +1,10 @@
-import { Inter } from "@next/font/google";
 import { useEffect, useState } from "react";
 import { getPosts } from "./api/postController";
 import Header from "../components/header";
 import Navbar from "../components/navbar";
 import Card from "../components/card";
 
-const inter = Inter({ subsets: ["latin"] });
-
-export default function Home({ data }) {
+export default function Category({ data }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageNum, setPageNum] = useState(0);
   const [posts, setPosts] = useState([]);
@@ -28,16 +25,14 @@ export default function Home({ data }) {
       <main>
         <Navbar />
         <div className="row text-center">{postsRender}</div>
-        <div></div>
       </main>
     </div>
   );
 }
 
 export async function getServerSideProps(context) {
-  const { page } = context.query;
-  const data = await getPosts({ page: page, numOfPage: 1 });
-  data.currentPage = page || 1;
+  const { category } = context.query;
+  const data = await getPosts({ category });
   return {
     props: { data },
   };

@@ -3,8 +3,8 @@ import { useRouter } from "next/router";
 
 const menuItems = [
   { route: "/", name: "Home" },
-  { route: "/about", name: "About" },
-  { route: "/game", name: "Game" },
+  { route: "/trending", name: "Trending" },
+  { route: "/sport", name: "Sport" },
 ];
 
 export default function Navbar({ data }) {

@@ -1,6 +1,7 @@
 import configs from "../../common/configs";
 import Header from "../../components/header";
 import Navbar from "../../components/navbar";
+import Sidebar from "../../components/sidebar";
 
 export default function Post({ data }) {
   function createMarkup() {
@@ -12,8 +13,13 @@ export default function Post({ data }) {
       <Header title={data.title} />
       <main>
         <Navbar />
-        <h3>{data.title}</h3>
-        <div dangerouslySetInnerHTML={createMarkup()} />
+        <div className="row">
+          <div className="col-6 col-md-8">
+            <h3>{data.title}</h3>
+            <div dangerouslySetInnerHTML={createMarkup()} />
+          </div>
+          <Sidebar />
+        </div>
       </main>
     </div>
   );
