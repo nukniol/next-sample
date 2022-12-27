@@ -2,9 +2,9 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["poka6.files.wordpress.com"],
+    domains: [process.env.WP_FILES_DOMAIN],
     unoptimized: true,
-  }
-}
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
