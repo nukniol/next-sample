@@ -1,7 +1,7 @@
-import configs from "../../common/configs";
 import Header from "../../components/header";
 import Navbar from "../../components/navbar";
 import Sidebar from "../../components/sidebar";
+import { getPost } from "../api/posts";
 
 export default function Post({ data }) {
   function createMarkup() {
@@ -14,11 +14,10 @@ export default function Post({ data }) {
       <main>
         <Navbar />
         <div className="row">
-          <div className="col-6 col-md-8">
-            <h3>{data.title}</h3>
+          <div>
+            <h3 className="text-center">{data.title}</h3>
             <div dangerouslySetInnerHTML={createMarkup()} />
           </div>
-          <Sidebar />
         </div>
       </main>
     </div>
@@ -27,21 +26,9 @@ export default function Post({ data }) {
 
 export async function getServerSideProps(context) {
   const { pid } = context.query;
-  const res = await fetch(
-    configs.API_POSTS_URL + `/slug:${pid}?fields=ID,title,content`
-  );
-  const json = await res.json();
-
-  if (!json) {
-    return {
-      redirect: {
-        destination: "/",
-        permanent: false,
-      },
-    };
-  }
+  const data = await getPost(pid);
 
   return {
-    props: { data: json }, // will be passed to the page component as props
+    props: { data },
   };
 }

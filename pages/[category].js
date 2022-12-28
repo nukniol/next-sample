@@ -1,19 +1,17 @@
 import { useEffect, useState } from "react";
-import { getPosts } from "./api/postController";
+import { getPosts } from "./api/posts";
 import Header from "../components/header";
 import Navbar from "../components/navbar";
 import Card from "../components/card";
 
 export default function Category({ data }) {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [pageNum, setPageNum] = useState(0);
+  const [category, setCategory] = useState({});
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    setCurrentPage(data.currentPage);
-    setPageNum(data.pageNum);
+    setCategory(data.category);
     setPosts(data.posts);
-  }, [data.posts]);
+  }, [data]);
 
   const postsRender = posts.map((post, index) => (
     <Card key={index} post={post} />
@@ -21,7 +19,7 @@ export default function Category({ data }) {
 
   return (
     <div className="container">
-      <Header title="Home" />
+      <Header title={category.name} />
       <main>
         <Navbar />
         <div className="row text-center">{postsRender}</div>

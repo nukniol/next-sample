@@ -1,6 +1,6 @@
 import { Inter } from "@next/font/google";
 import { useEffect, useState } from "react";
-import { getPosts } from "./api/postController";
+import { getPosts } from "./api/posts";
 import Header from "../components/header";
 import Navbar from "../components/navbar";
 import Card from "../components/card";
@@ -8,15 +8,11 @@ import Card from "../components/card";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home({ data }) {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [pageNum, setPageNum] = useState(0);
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    setCurrentPage(data.currentPage);
-    setPageNum(data.pageNum);
     setPosts(data.posts);
-  }, [data.posts]);
+  }, [data]);
 
   const postsRender = posts.map((post, index) => (
     <Card key={index} post={post} />
@@ -36,8 +32,7 @@ export default function Home({ data }) {
 
 export async function getServerSideProps(context) {
   const { page } = context.query;
-  const data = await getPosts({ page: page, numOfPage: 1 });
-  data.currentPage = page || 1;
+  const data = await getPosts();
   return {
     props: { data },
   };
