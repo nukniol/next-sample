@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import { getPosts } from "./api/posts";
-import Header from "../components/header";
-import Navbar from "../components/navbar";
 import Card from "../components/card";
 
 export default function Category({ data }) {
@@ -17,21 +15,13 @@ export default function Category({ data }) {
     <Card key={index} post={post} />
   ));
 
-  return (
-    <div className="container">
-      <Header title={category.name} />
-      <main>
-        <Navbar />
-        <div className="row text-center">{postsRender}</div>
-      </main>
-    </div>
-  );
+  return <div className="row text-center">{postsRender}</div>;
 }
 
 export async function getServerSideProps(context) {
   const { category } = context.query;
   const data = await getPosts({ category });
   return {
-    props: { data },
+    props: { data, title: data.category.name },
   };
 }

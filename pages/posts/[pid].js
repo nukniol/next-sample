@@ -1,6 +1,3 @@
-import Header from "../../components/header";
-import Navbar from "../../components/navbar";
-import Sidebar from "../../components/sidebar";
 import { getPost } from "../api/posts";
 
 export default function Post({ data }) {
@@ -9,17 +6,11 @@ export default function Post({ data }) {
   }
 
   return (
-    <div className="container">
-      <Header title={data.title} />
-      <main>
-        <Navbar />
-        <div className="row">
-          <div>
-            <h3 className="text-center">{data.title}</h3>
-            <div dangerouslySetInnerHTML={createMarkup()} />
-          </div>
-        </div>
-      </main>
+    <div className="row">
+      <div>
+        <h3 className="text-center">{data.title}</h3>
+        <div dangerouslySetInnerHTML={createMarkup()} />
+      </div>
     </div>
   );
 }
@@ -29,6 +20,6 @@ export async function getServerSideProps(context) {
   const data = await getPost(pid);
 
   return {
-    props: { data },
+    props: { data, title: data.title },
   };
 }

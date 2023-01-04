@@ -1,8 +1,6 @@
 import { Inter } from "@next/font/google";
 import { useEffect, useState } from "react";
 import { getPosts } from "./api/posts";
-import Header from "../components/header";
-import Navbar from "../components/navbar";
 import Card from "../components/card";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -18,22 +16,13 @@ export default function Home({ data }) {
     <Card key={index} post={post} />
   ));
 
-  return (
-    <div className="container">
-      <Header title="Home" />
-      <main>
-        <Navbar />
-        <div className="row text-center">{postsRender}</div>
-        <div></div>
-      </main>
-    </div>
-  );
+  return <div className="row text-center">{postsRender}</div>;
 }
 
 export async function getServerSideProps(context) {
   const { page } = context.query;
   const data = await getPosts();
   return {
-    props: { data },
+    props: { data, title: "Home Page" },
   };
 }
