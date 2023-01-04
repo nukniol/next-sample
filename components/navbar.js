@@ -1,19 +1,8 @@
-import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 
-export default function Navbar() {
+export default function Navbar({categories}) {
   const route = useRouter();
-  const [categories, setCategories] = useState([]);
-
-  useEffect(() => {
-    async function fetchData() {
-      const result = await axios("/api/categories");
-      setCategories(result.data.categories);
-    }
-    fetchData();
-  }, []);
 
   const itemsRender = categories.map((item, index) => (
     <li key={index} className="nav-item">

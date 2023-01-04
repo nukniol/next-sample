@@ -6,7 +6,6 @@ export default function About() {
     <>
       <Header title="About" />
       <main>
-        <Navbar />
       </main>
     </>
   );
