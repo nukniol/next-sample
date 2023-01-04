@@ -1,10 +1,13 @@
-export default function Sidebar() {
+import Card from "./card";
+
+export default function Sidebar({ posts }) {
+  const postsRender = posts.posts.map((post, index) => (
+    <Card key={index} post={post} type="list" />
+  ));
   return (
-    <div className="col-6 col-md-4">
+    <div className="col-md-4">
       <h2>Top trending</h2>
-      <ul>
-        <li></li>
-      </ul>
+      <ul>{postsRender}</ul>
     </div>
   );
 }

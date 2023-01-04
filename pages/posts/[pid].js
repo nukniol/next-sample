@@ -1,6 +1,6 @@
 import { getPost } from "../api/posts";
 
-export default function Post({ data }) {
+export default function Post({ data, posts }) {
   function createMarkup() {
     return { __html: data.content };
   }
@@ -18,6 +18,7 @@ export default function Post({ data }) {
 export async function getServerSideProps(context) {
   const { pid } = context.query;
   const data = await getPost(pid);
+  const posts = await getPosts();
 
   return {
     props: { data, title: data.title },

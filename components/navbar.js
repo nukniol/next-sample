@@ -7,7 +7,7 @@ export default function Navbar({categories}) {
   const itemsRender = categories.map((item, index) => (
     <li key={index} className="nav-item">
       <Link
-        href={item.slug}
+        href={`/${item.slug}`}
         className={
           "nav-link" + (route.asPath.includes(item.slug) ? " active" : "")
         }
