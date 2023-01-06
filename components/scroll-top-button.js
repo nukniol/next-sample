@@ -1,3 +1,4 @@
+import styles from "../styles/TopButton.module.css";
 import { useEffect, useState } from "react";
 
 export default function ScrollTopButton() {
@@ -20,9 +21,9 @@ export default function ScrollTopButton() {
   }, []);
 
   return (
-    <button
+    <div className={styles.topButton}
       onClick={scrollToTop}
       style={{ display: visible ? "inline" : "none" }}
-    ></button>
+    ></div>
   );
 }

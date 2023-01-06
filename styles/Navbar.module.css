@@ -1,0 +1,14 @@
+.navbar {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.navbar a {
+  margin: 0 10px;
+}
+
+.navbar a:hover,
+.navbar .linkActive {
+  padding-bottom: 5px;
+  border-bottom: 1px dotted;
+}

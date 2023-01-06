@@ -21,6 +21,11 @@ iframe {
   object-fit: cover;
 }
 
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .row::after {
   content: "";
   clear: both;

@@ -18,7 +18,7 @@ export default function Post({ data, posts }) {
 export async function getServerSideProps(context) {
   const { pid } = context.query;
   const data = await getPost(pid);
-  const posts = await getPosts();
+  // const posts = await getPosts();
 
   return {
     props: { data, title: data.title },

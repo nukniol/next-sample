@@ -1,6 +1,9 @@
+import { Inter } from "@next/font/google";
 import Navbar from "./navbar";
 import Head from "next/head";
 import ScrollTopButton from "./scroll-top-button";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export default function Layout({ children }) {
   const { title, description, categories } = children.props;
@@ -16,11 +19,11 @@ export default function Layout({ children }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Navbar categories={categories} />
-      <div className="container">
+      <div className={inter.className}>
+        <Navbar categories={categories} />
+        <ScrollTopButton />
         <main>{children}</main>
       </div>
-      <ScrollTopButton />
     </>
   );
 }
